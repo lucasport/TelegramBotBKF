@@ -3,7 +3,7 @@
 
 This simple python bot generates affiliate links from telegram messages. It can work added in a group or speaking directly to it. It would recognize any Amazon URL in any message and reply with the affiliate URL.
 
-The setup is done using Heroku as the host for the bot.
+The setup can be done using free cloud hosting services like Render or Railway.
 
 NOTE: It will only recognize the first Amazon URL in the message for now.
 
@@ -52,7 +52,53 @@ Set the environment variables correctly and run the bot.
 ```
 python3 bot.py
 ```
-NOTE: To keep the bot running, the python program must be running. This configuration is useful for an always on server like set-up. 
+NOTE: To keep the bot running, the python program must be running. This configuration is useful for an always on server like set-up.
+
+## Deploy on Free Cloud Hosting
+
+### Option 1: Render (Free)
+
+1. Create a GitHub repository and push your code to it
+2. Go to [render.com](https://render.com) and sign up/login
+3. Click "New +" and select "Web Service"
+4. Connect your GitHub repository
+5. Configure the service:
+   - **Name**: affiliate-telegram-bot (or any name you prefer)
+   - **Region**: Choose the nearest region
+   - **Branch**: main
+   - **Runtime**: Python 3
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `python bot.py`
+6. Add environment variables in the "Environment" section:
+   - `TOKEN`: Your Telegram bot token
+   - `affiliate_tag`: Your Amazon affiliate tag
+   - `search_url`: amazon.com (or your region)
+   - `DEV_CHAT_ID`: (Optional) Your Telegram chat ID for error messages
+7. Click "Create Web Service"
+8. The bot will be deployed and start running automatically
+
+### Option 2: Railway (Free)
+
+1. Create a GitHub repository and push your code to it
+2. Go to [railway.app](https://railway.app) and sign up/login
+3. Click "New Project" and select "Deploy from GitHub repo"
+4. Connect your GitHub repository
+5. Railway will detect it's a Python project automatically
+6. Add environment variables in the "Variables" tab:
+   - `TOKEN`: Your Telegram bot token
+   - `affiliate_tag`: Your Amazon affiliate tag
+   - `search_url`: amazon.com (or your region)
+   - `DEV_CHAT_ID`: (Optional) Your Telegram chat ID for error messages
+7. Click "Deploy"
+8. The bot will be deployed and start running automatically
+
+### Important Notes
+
+- Both Render and Railway offer free tiers that are sufficient for running this bot
+- The bot will automatically restart if it crashes
+- Make sure your `.env` file is NOT committed to GitHub (it's already in .gitignore)
+- The bot needs to be added to your Telegram conversation using the `/start` command
+- You can test the bot by sending an Amazon link in the chat 
 
 ## Useful links
 
